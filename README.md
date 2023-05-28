@@ -4,4 +4,4 @@ Available at [molbuilder.eu.org](https://thangckt.github.io/molbuilder/)
 
 # Cite this work
 
-Nguyen, Cao Thang. Molbuilder: Online App to Generate Models for Atomistic Simulations. Zenodo May 28, 2023, p. [https://doi.org/10.5281/zenodo.7979453](https://thangckt.github.io/molbuilder/)
+Nguyen, Cao Thang. (2023). molbuilder: Online app to generate models for atomistic simulations. Zenodo. [https://doi.org/10.5281/zenodo.7979453](https://thangckt.github.io/molbuilder/)
