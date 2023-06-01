@@ -192,10 +192,10 @@ extra_css:
 ## Page tree
 nav:
   # - Home: thangckt.github.io
-  - About: index.md
+  # - About: index.md
   - Polymer:
-  #   - polymer.html
-      - index.md
+    # - polymer.html
+    - index.md
 
   - Small-molecular:
     - index.md
