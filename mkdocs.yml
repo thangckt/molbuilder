@@ -195,4 +195,11 @@ nav:
   # - Home: thangckt.github.io
   - About: index.md
   - Polymer:
-    - index.html
+    # - index.html
+
+  - Small-molecular:
+
+  - Crystalline:
+
+  - 2D materials:
+
