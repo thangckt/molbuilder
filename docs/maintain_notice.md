@@ -1,6 +1,8 @@
 ---
 hide:
-
+  # - toc
+  # - navigation
+ᴴₒᴴₒᴴₒ: false
 ---
 
 
