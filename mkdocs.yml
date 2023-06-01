@@ -8,8 +8,8 @@ copyright: Copyright &copy; 2023 <a href="https://thangckt.github.io">thangckt</
 ## Configuration
 theme:
   name: "material"     #  "material"    "mkdocs"    "readthedocs"     'rtd-dropdown'   windmill  bootswatch
-  logo: 1images/tripe.png
-  favicon: 1images/tripe.png
+  logo: 1images/CO.png
+  favicon: 1images/CO.png
   highlightjs: true
   features:
     - content.code.annotate
@@ -199,7 +199,6 @@ nav:
 
   - Small-molecular:
     - index.md
-
   - Crystalline:
     - index.md
   - 2D material:
@@ -208,3 +207,19 @@ nav:
     - index.md
   - Nanoparticle:
     - index.md
+
+
+
+  ## Maintain notice
+  # - Polymer:
+  #   - maintain_notice.md
+  # - Small-molecular:
+  #   - maintain_notice.md
+  # - Crystalline:
+  #   - maintain_notice.md
+  # - 2D material:
+  #   - maintain_notice.md
+  # - Nanotube:
+  #   - maintain_notice.md
+  # - Nanoparticle:
+  #   - maintain_notice.md
