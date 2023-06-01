@@ -193,16 +193,18 @@ extra_css:
 nav:
   # - Home: thangckt.github.io
   - About: index.md
-  # - Polymer:
+  - Polymer:
   #   - polymer.html
+      - index.md
 
-  # - Small-molecular:
+  - Small-molecular:
+    - index.md
 
-  # - Crystalline:
-
-  # - 2D material:
-
-  # - Nanotube:
-
-  # - Nanoparticle:
-
+  - Crystalline:
+    - index.md
+  - 2D material:
+    - index.md
+  - Nanotube:
+    - index.md
+  - Nanoparticle:
+    - index.md
