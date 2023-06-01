@@ -5,7 +5,7 @@ hide:
 ᴴₒᴴₒᴴₒ: false
 ---
 
-!!! info "NOTICE"
+!!! info
 
     This app is under maintenance now. Please check back later.
 
