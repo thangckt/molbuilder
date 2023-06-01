@@ -212,10 +212,10 @@ extra_css:
 
 ## Maintain notice
 nav:
-  - Polymer: index.md
-  - Small-molecular: index.md
-  - Crystalline: index.md
-  - 2D material: index.md
-  - Nanotube: index.md
-  - Nanoparticle: index.md
+  - Polymer: thangckt.github.io/molbuilder
+  - Small-molecular: thangckt.github.io/molbuilder
+  - Crystalline: thangckt.github.io/molbuilder
+  - 2D material: thangckt.github.io/molbuilder
+  - Nanotube: thangckt.github.io/molbuilder
+  - Nanoparticle: thangckt.github.io/molbuilder
 
