@@ -212,10 +212,10 @@ extra_css:
 
 ## Maintain notice
 nav:
-  - Polymer: http://thangckt.github.io/molbuilder
-  - Small-molecular: http://thangckt.github.io/molbuilder
-  - Crystalline: http://thangckt.github.io/molbuilder
-  - 2D material: http://thangckt.github.io/molbuilder
-  - Nanotube: http://thangckt.github.io/molbuilder
-  - Nanoparticle: http://thangckt.github.io/molbuilder
+  - Polymer: https://thangckt.github.io/molbuilder
+  - Small-molecular: https://thangckt.github.io/molbuilder
+  - Crystalline: https://thangckt.github.io/molbuilder
+  - 2D material: https://thangckt.github.io/molbuilder
+  - Nanotube: https://thangckt.github.io/molbuilder
+  - Nanoparticle: https://thangckt.github.io/molbuilder
 
