@@ -194,8 +194,8 @@ extra_css:
 nav:
   # - Home: thangckt.github.io
   - About: index.md
-  # - Polymer:
-    # - index.html
+  - Polymer:
+    - polymer.html
 
   # - Small-molecular:
 
