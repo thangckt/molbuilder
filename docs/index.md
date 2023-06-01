@@ -5,7 +5,10 @@ hide:
 ᴴₒᴴₒᴴₒ: false
 ---
 
-NOTICE: This app is under maintenance now. Please check back later.
+!!! info "NOTICE"
+
+    This app is under maintenance now. Please check back later.
+
 
 
 # molbuilder
