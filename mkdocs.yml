@@ -8,8 +8,8 @@ copyright: Copyright &copy; 2023 <a href="https://thangckt.github.io">thangckt</
 ## Configuration
 theme:
   name: "material"     #  "material"    "mkdocs"    "readthedocs"     'rtd-dropdown'   windmill  bootswatch
-  logo: 1images/acetone_ball_stick.png
-  favicon: 1images/acetone_ball_stick.png
+  logo: 1images/tripe.png
+  favicon: 1images/tripe.png
   highlightjs: true
   features:
     - content.code.annotate

@@ -1,5 +1,8 @@
-# molbuilder
-
 NOTICE: This app is now under maintenance time. Please check back later.
 
-<img src="1images/caffein.png">
+
+# molbuilder
+
+An online app to generate models for atomistic simulations.
+
+<img src="1images/chain.png">
