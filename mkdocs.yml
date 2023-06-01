@@ -2,7 +2,6 @@ site_name: molbuilder
 site_author: thangckt
 
 
-
 ## Copyright
 copyright: Copyright &copy; 2023 <a href="https://thangckt.github.io">thangckt</a>
 
@@ -197,9 +196,13 @@ nav:
   - Polymer:
     - polymer.html
 
-  # - Small-molecular:
+  - Small-molecular:
 
-  # - Crystalline:
+  - Crystalline:
 
-  # - 2D materials:
+  - 2D material:
+
+  - Nanotube:
+
+  - Nanoparticle:
 
