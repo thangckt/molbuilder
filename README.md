@@ -1,5 +1,7 @@
 # molbuilder
 
+`molbuilder`: Online app to generate models for atomistic simulations
+
 Available at [molbuilder.eu.org](https://thangckt.github.io/molbuilder/)
 
 # Cite this work
