@@ -39,6 +39,7 @@
                     ip: data.ip,
                     org: data.org,
                     city: data.city,
+                    region: data.region,
                     country: data.country_name,
                     postal: data.postal,
                     asn: data.asn,
@@ -52,6 +53,7 @@
                     ip: data.ip,
                     org: data.org.split(' ').slice(1).join(" "),
                     city: data.city,
+                    region: data.region,
                     country: data.country,
                     postal: data.postal,
                     asn: data.org.split(' ')[0],
@@ -65,6 +67,7 @@
                     ip: data.ip,
                     org: data.organization,
                     city: data.city,
+                    region: data.region,
                     country: data.country,
                     postal: data.postal_code,
                     asn: data.continent_code + data.asn,
@@ -78,6 +81,7 @@
                     ip: data.ip,
                     org: data.connection.isp,
                     city: data.city,
+                    region: data.region,
                     country: data.country,
                     postal: data.postal,
                     asn: data.connection.asn,
@@ -91,6 +95,7 @@
                     ip: data.ip,
                     org: data.isp,
                     city: data.city,
+                    region: data.region,
                     country: data.country,
                     postal: data.zip,
                     asn: data.as.split(' ')[0],
@@ -129,74 +134,109 @@
     // Get browser information from user agent string
     function getBrowserInfo() {
         const ua = navigator.userAgent;
-        const browserInfo = { name: 'Unknown', version: 'Unknown' };
+        const info = {
+            browser: 'Unk',
+            os: 'Unk',
+            arch: 'Unk',
+            device: 'Unk',
+            screen: `${window.screen.width}x${window.screen.height} @${window.devicePixelRatio}x`,
+            language: navigator.language || 'Unk',
+            isTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0
+        };
 
-        // Check for iOS devices and specific Safari scenarios
+        // --- Arch detection ---
+        let arch = navigator.userAgentData?.architecture || navigator.platform || 'Unknown';
+        if (arch.startsWith('Linux ')) {
+            arch = arch.replace('Linux ', '');
+        }
+        info.arch = arch;
+
+        // --- Browser detection (same as before) ---
         if (/iP(hone|od|ad)/.test(ua)) {
             if (/Safari/.test(ua) && !/CriOS/.test(ua) && !/FxiOS/.test(ua)) {
-                // Safari on iOS
-                const versionMatch = ua.match(/Version\/(\d+\.\d+)/);
-                browserInfo.name = 'Safari';
-                browserInfo.version = versionMatch ? versionMatch[1] : 'Unknown';
+                const version = ua.match(/Version\/(\d+\.\d+)/)?.[1] || 'Unk';
+                info.browser = `Safari-${version}`;
             } else if (/CriOS/.test(ua)) {
-                // Chrome on iOS
-                const versionMatch = ua.match(/CriOS\/(\d+\.\d+)/);
-                browserInfo.name = 'Chrome';
-                browserInfo.version = versionMatch ? versionMatch[1] : 'Unknown';
+                info.browser = `Chrome-${ua.match(/CriOS\/(\d+\.\d+)/)?.[1] || 'Unk'}`;
             } else if (/FxiOS/.test(ua)) {
-                // Firefox on iOS
-                const versionMatch = ua.match(/FxiOS\/(\d+\.\d+)/);
-                browserInfo.name = 'Firefox';
-                browserInfo.version = versionMatch ? versionMatch[1] : 'Unknown';
+                info.browser = `Firefox-${ua.match(/FxiOS\/(\d+\.\d+)/)?.[1] || 'Unk'}`;
             } else {
-                // Other WebKit-based browsers on iOS
-                browserInfo.name = 'WebKit-based Browser';
+                info.browser = 'WebKit-based-iOS';
             }
         } else {
-            // Handle non-iOS devices
             const browserData = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
             if (/trident/i.test(browserData[1])) {
-                const version = /\brv[ :]+(\d+)/g.exec(ua) || [];
-                browserInfo.name = 'Internet Explorer';
-                browserInfo.version = version[1] || 'Unknown';
+                const version = (/\brv[ :]+(\d+)/g.exec(ua) || [])[1] || 'Unk';
+                info.browser = `Internet Explorer-${version}`;
             } else if (browserData[1] === 'Chrome') {
                 const temp = ua.match(/\b(OPR|Edg)\/(\d+)/);
                 if (temp) {
-                    browserInfo.name = temp[1] === 'OPR' ? 'Opera' : 'Edge';
-                    browserInfo.version = temp[2];
+                    info.browser = `${temp[1] === 'OPR' ? 'Opera' : 'Edge'}-${temp[2]}`;
                 } else {
-                    browserInfo.name = 'Chrome';
-                    browserInfo.version = browserData[2];
+                    info.browser = `Chrome-${browserData[2]}`;
                 }
             } else if (browserData[1]) {
-                browserInfo.name = browserData[1];
-                browserInfo.version = browserData[2];
+                info.browser = `${browserData[1]}-${browserData[2]}`;
             }
-
-            // Special handling for Safari
             if (/Safari/.test(ua) && !/Chrome/.test(ua)) {
-                const versionMatch = ua.match(/Version\/(\d+\.\d+)/);
-                browserInfo.name = 'Safari';
-                browserInfo.version = versionMatch ? versionMatch[1] : 'Unknown';
+                const version = ua.match(/Version\/(\d+\.\d+)/)?.[1] || 'Unk';
+                info.browser = `Safari-${version}`;
             }
         }
 
-        return browserInfo;
+        // --- OS detection (same as before) ---
+        if (/Windows NT/.test(ua)) {
+            info.os = `Windows-${ua.match(/Windows NT (\d+\.\d+)/)?.[1] || 'Unk'}`;
+        } else if (/Mac OS X/.test(ua)) {
+            info.os = `macOS-${ua.match(/Mac OS X (\d+[_\.\d]+)/)?.[1].replace(/_/g, '.') || 'Unk'}`;
+        } else if (/Android/.test(ua)) {
+            info.os = `Android-${ua.match(/Android (\d+(\.\d+)?)/)?.[1] || 'Unk'}`;
+        } else if (/Linux/.test(ua)) {
+            let distro = 'Linux';
+            let de = 'Unk';
+            let version = 'Unk';
+
+            if (/Ubuntu/i.test(ua)) distro = 'Ubuntu';
+            else if (/Fedora/i.test(ua)) distro = 'Fedora';
+            else if (/Arch/i.test(ua)) distro = 'Arch';
+            else if (/Debian/i.test(ua)) distro = 'Debian';
+
+            const versionMatch = ua.match(/(Ubuntu|Fedora|Debian)\/?(\d+[\.\d]*)/i);
+            if (versionMatch) version = versionMatch[2];
+
+            info.os = `${distro}-${de}-${version}`;
+        } else if (/iP(hone|od|ad)/.test(ua)) {
+            info.os = 'iOS';
+        }
+
+        // --- Device type detection ---
+        if (/Mobi|iPhone|Android.+Mobile|Windows Phone/i.test(ua)) {
+            info.device = 'Mobile';
+        } else if (/iPad|Tablet|Nexus 7|SM-T|Kindle|Silk/i.test(ua)) {
+            info.device = 'Tablet';
+        } else if (/Windows|Macintosh|X11|Linux/i.test(ua)) {
+            info.device = 'Desktop';
+        } else {
+            info.device = 'Unk';
+        }
+
+        return info;
     }
 
+    // Get current timestamp
     function getTimestamp() {
         const options = {
             timeZone: "Asia/Seoul",
-            year: 'numeric',
+            year: '2-digit',
             month: 'short',  // short: "Jan", long: "January"
-            day: 'numeric',
+            day: '2-digit',
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
             hour12: false // 24-hour format
         };
         const timestamp = new Date().toLocaleString("en-US", options);
-        return timestamp.replace(/ at /, ', ');
+        return timestamp.replace(/(\d{2})\s(\w{3})\s(\d{2}), (\d{2}:\d{2}:\d{2})/, '$3$2$1, $4');
     }
 
     // Log visitor information and send to Google Sheet
@@ -214,11 +254,18 @@
             region: visitorInfo.region,
             country: visitorInfo.country,
             postal: visitorInfo.postal,
-            latitude: visitorInfo.latitude,
-            longitude: visitorInfo.longitude,
             asn: visitorInfo.asn,
-            browser: `${browserInfo.name} ${browserInfo.version}`,
-            os: navigator.platform,
+            // latitude: visitorInfo.latitude,
+            // longitude: visitorInfo.longitude,
+            // Browser Info
+            browser: browserInfo.browser,
+            os: browserInfo.os,
+            device: browserInfo.device,
+            arch: browserInfo.arch,
+            screen: browserInfo.screen,
+            language: browserInfo.language,
+            isTouch: browserInfo.isTouch,
+            // Page Info
             currentUrl: currentUrl,
         };
         await sendDataToGoogleApp(jsonData);
